@@ -5,7 +5,7 @@ from extreme_data.meteo_france_data.scm_models_data.crocus.crocus_variables impo
     TotalSnowLoadVariable, CrocusTotalSweVariable, CrocusDepthVariable
 from extreme_data.meteo_france_data.scm_models_data.safran.safran_variable import SafranSnowfallVariable, \
     SafranTotalPrecipVariable, SafranRainfallVariable
-from extreme_data.meteo_france_data.scm_models_data.utils import Season
+from extreme_data.meteo_france_data.scm_models_data.utils import Season, season_to_str, season_to_suffix
 from root_utils import classproperty
 
 
@@ -102,7 +102,14 @@ class SafranRainfallSimulationVariable(AbstractAdamontVariable):
     @classproperty
     def indicator_name_for_maxima(cls):
         return 'max-1day-rainf-year'
-
+    @classproperty
+    def season_to_indicator_name_for_maxima(cls):
+        d = {}
+        prefix = "max-1day-rainf"
+        for season in [Season.winter, Season.summer, Season.spring, Season.autumn]:
+            keyword = f"{prefix}-{season_to_str(season)}-{season_to_suffix(season)}"
+            d[season] = keyword
+        return d
 
 class SafranPrecipitationSimulationVariable(AbstractAdamontVariable):
     UNIT = SafranTotalPrecipVariable.UNIT

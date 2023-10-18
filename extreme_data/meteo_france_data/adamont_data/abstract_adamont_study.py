@@ -96,7 +96,7 @@ class AbstractAdamontStudy(AbstractStudy):
             time = np.array(dataset.variables['time'])
             msg = 'len_years={} while len_time={},' \
                   'check year_min and year_max, ' \
-                  'check in debug mode the time field of the daatset to see the starting date'.format(years, time)
+                  'check in debug mode the time field of the daatset to see the starting date'.format(len(years), len(time))
             # # Some print to check which year are in the data
             # start = datetime(year=2005, month=8, day=1, hour=6, minute=0, second=0)
             # dates = [start + timedelta(hours=int(h)) for h in time]
@@ -133,7 +133,8 @@ class AbstractAdamontStudy(AbstractStudy):
     def nc_filename_adamont_v2(self, scenario, maxima_date):
         scenario_name = self._scenario_to_str_adamont_v2(scenario)
         indicator_name = self.indicator_name(maxima_date)
-        return '_'.join([indicator_name, self.gcm_rcm_full_name, scenario_name]) + '.nc'
+        filename = '_'.join([indicator_name, self.gcm_rcm_full_name, scenario_name]) + '.nc'
+        return filename
 
     def indicator_name(self, maxima_date) -> str:
         if maxima_date:

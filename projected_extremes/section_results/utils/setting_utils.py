@@ -31,14 +31,13 @@ from spatio_temporal_dataset.coordinates.temporal_coordinates.temperature_covari
     AnomalyTemperatureWithSplineTemporalCovariate
 
 
-def set_up_and_load(fast, snowfall=True, nb_days=1):
+def set_up_and_load(fast, snowfall=True, nb_days=1,     season = Season.annual):
     safran_study_class, study_class = load_study_classes(snowfall, nb_days)
     OneFoldFit.multiprocessing = False
 
     remove_physically_implausible_models, display_only_model_that_pass_gof_test = False, False
 
     fit_method = MarginFitMethod.evgam
-    season = Season.annual
 
     model_classes_list = [NonStationaryLocationAndScaleAndShapeTemporalModel,
                           NonStationaryTwoLinearLocationAndScaleAndShapeModel,

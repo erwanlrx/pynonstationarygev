@@ -21,7 +21,7 @@ class Season(Enum):
     winter_extended = 1
     winter = 2
     spring = 3
-    automn = 4
+    autumn = 4
     summer = 5
 
 
@@ -49,9 +49,13 @@ season_to_start_day_and_last_day = {
     Season.winter: ('12-01', '02-28'),
     Season.spring: ('03-01', '05-31'),
     Season.summer: ('06-01', '08-31'),
-    Season.automn: ('09-01', '11-30'),
+    Season.autumn: ('09-01', '11-30'),
 
 }
+
+def season_to_suffix(season):
+    start_day, last_day = season_to_start_day_and_last_day[season]
+    return start_day[:2] + '-' + last_day[:2]
 
 
 def first_day_and_last_day(season):
